@@ -1,0 +1,6 @@
+.mypy_cache
+Backups
+Modular 808
+*.RPP
+venv
+.idea
