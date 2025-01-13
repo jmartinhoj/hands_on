@@ -46,9 +46,8 @@ This project is an interactive audio system that leverages **PureData (PlugData)
 
 ## Installation
 
-1. Clone the Repository
+1. Enter the folder
 ```bash
-git clone https://github.com/jmartinhoj/handson
 cd handson
 ```
 
