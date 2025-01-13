@@ -58,9 +58,9 @@ pip install -r requirements.txt
 ```
 
 3. Additional Software
-	•	PlugData: Download and install PlugData.
-	•	Reaper: Download and install Reaper DAW.
-	•	Korg Berlin Prototype Phase 8 VST: Ensure that the VST is installed and configured in Reaper.
+	- PlugData: Download and install PlugData.
+	- Reaper: Download and install Reaper DAW.
+	- Korg Berlin Prototype Phase 8 VST: Ensure that the VST is installed and configured in Reaper.
 
 ## Usage
 1.	Run the Python Gesture Detection Script:
@@ -74,10 +74,4 @@ python main.py
 4.	Perform Gestures:
 	- Move your hands in front of the camera as described in the gesture controls.
 	- The audio and MIDI notes will be triggered and modified in real time.
-
-
-Acknowledgments
-	•	MediaPipe: For gesture recognition.
-	•	PlugData: For the PureData workflow.
-	•	Reaper and Korg Berlin Prototype Phase 8: For high-quality audio tools.
 
