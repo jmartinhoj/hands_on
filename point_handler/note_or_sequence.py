@@ -1,6 +1,6 @@
 import datetime
 
-from mediapipe.tasks.python.components.containers import NormalizedLandmark
+from mediapipe.tasks.python.components.containers import NormalizedLandmark, Category
 from pythonosc import udp_client
 
 from point_handler.base import PointHandlerBase, hand
@@ -9,7 +9,7 @@ from point_handler.utils import distance_between_points
 
 class NoteOrSequence(PointHandlerBase):
 
-    def __init__(self, client: udp_client.SimpleUDPClient, point1_index: int, point2_index: int, note_endpoint: str, sequence_endpoint: str):
+    def __init__(self, client: udp_client.SimpleUDPClient, point1_index: int, point2_index: int, note_endpoint: str, sequence_endpoint: str, threshold: float):
         super().__init__(client)
         self.touching = False
         self.first_touch: datetime.datetime | None = None
@@ -19,14 +19,19 @@ class NoteOrSequence(PointHandlerBase):
         self.point2_index = point2_index
         self.note_endpoint = note_endpoint
         self.sequence_endpoint = sequence_endpoint
+        self.threshold = threshold
 
-    @staticmethod
-    def _are_touching(p1: NormalizedLandmark, p2: NormalizedLandmark) -> bool:
+    def _are_touching(self, p1: NormalizedLandmark, p2: NormalizedLandmark) -> bool:
         distance = distance_between_points((p1.x, p1.y), (p2.x, p2.y))
-        return distance < 0.1
+        return distance < self.threshold
 
-    def handle(self, right_hand_points: hand | None, left_hand_points: hand | None, *_) -> None:
+    def handle(self, right_hand_points: hand | None, left_hand_points: hand | None, right_hand_gestures: list[Category] | None, left_hand_gestures: list[Category] | None,) -> None:
         if right_hand_points is None:
+            return
+
+
+        print(right_hand_gestures)
+        if not any(g.category_name == "Open_Palm" for g in right_hand_gestures) and not any(g.category_name == "Unknown" for g in right_hand_gestures) and not any(g.category_name == "None" for g in right_hand_gestures):
             return
 
         index_tip = right_hand_points[self.point1_index]

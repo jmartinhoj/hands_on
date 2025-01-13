@@ -26,8 +26,11 @@ from mediapipe.tasks.python.vision.gesture_recognizer import (
 from pythonosc import udp_client
 
 from point_handler.base import PointHandlerBase
-from point_handler.note_generator import NoteGenerator
+from point_handler.melody_controller import MelodyController
 from point_handler.note_or_sequence import NoteOrSequence
+from point_handler.octave_chooser import OctaveChooser
+from point_handler.scale_controller import ScaleController
+from point_handler.sequence_chooser import SequenceChooser
 from point_handler.synth_controller import SynthController
 
 global_img, global_results = None, None
@@ -95,16 +98,24 @@ def run():
             point1_index=HandLandmark.INDEX_FINGER_TIP,
             point2_index=HandLandmark.THUMB_TIP,
             note_endpoint="note",
-            sequence_endpoint="sequence"
+            sequence_endpoint="sequence",
+            threshold=0.1
         ),
         NoteOrSequence(
             client,
             point1_index=HandLandmark.PINKY_TIP,
             point2_index=HandLandmark.RING_FINGER_DIP,
             note_endpoint="kick",
-            sequence_endpoint="kick_sequence"
+            sequence_endpoint="kick_sequence",
+            threshold=0.04
         ),
-        SynthController(client)
+        OctaveChooser(
+            client,
+        ),
+        SequenceChooser(client),
+        ScaleController(client),
+        SynthController(client),
+        MelodyController(client)
     )
     options = load_model(handlers=handlers)
     webcam = cv2.VideoCapture(0)

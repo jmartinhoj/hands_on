@@ -20,7 +20,8 @@ class SynthController(PointHandlerBase):
             right_hand_gestures: list[Category] | None,
             left_hand_gestures: list[Category] | None,
     ) -> None:
-        if left_hand_points:
+        print("hold", self.hold)
+        if left_hand_points and not self.hold:
             self.client.send_message(
                 "/synth_controls",
                 [
@@ -35,6 +36,7 @@ class SynthController(PointHandlerBase):
             if is_fist_closed:
                 if self.last_gesture != "closed":
                     print("Fist closed. Sending 1.")
+                    self.hold = False  # Reset hold
                     self.started_playing = datetime.datetime.now()  # Start timer
                     if not self.hold:
                         self.client.send_message("/synth", 1)
@@ -48,7 +50,7 @@ class SynthController(PointHandlerBase):
                         self.client.send_message("/synth", 0)
                     else:
                         print("Fist opened after hold. No 0 sent.")
-                    self.hold = False  # Reset hold
+                    # self.hold = False  # Reset hold
                 self.started_playing = None  # Reset time when opened
 
             self.last_gesture = "closed" if is_fist_closed else "open"
