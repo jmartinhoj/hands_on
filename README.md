@@ -48,8 +48,8 @@ This project is an interactive audio system that leverages **PureData (PlugData)
 
 1. Clone the Repository
 ```bash
-git clone <your-repo-url>
-cd <your-repo-directory>
+git clone https://github.com/jmartinhoj/handson
+cd handson
 ```
 
 2. **Install Dependencies**: Install the required dependencies from requirements.txt:
