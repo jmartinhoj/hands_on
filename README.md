@@ -35,7 +35,7 @@ This project is an interactive audio system that leverages **PureData (PlugData)
 
 ### Right Hand Gestures:
 - **Closed Fist**:
-  - **Action**: Plays a harmony using oscillators in PlugData.
+  - **Action**: Plays a harmony using oscillators in PlugData (the volume of the harmony varies according to the X position of the hand).
   - **Hold Gesture**: Sustains the harmony.
 
 - **Pointing Up**:
@@ -52,11 +52,10 @@ git clone <your-repo-url>
 cd <your-repo-directory>
 ```
 
-2. Install Dependencies
-
-Install the required dependencies from requirements.txt:
-
+2. **Install Dependencies**: Install the required dependencies from requirements.txt:
+```bash
 pip install -r requirements.txt
+```
 
 3. Additional Software
 	•	PlugData: Download and install PlugData.
