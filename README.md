@@ -48,7 +48,7 @@ This project is an interactive audio system that leverages **PureData (PlugData)
 
 1. Enter the folder
 ```bash
-cd handson
+cd hands_on
 ```
 
 2. **Install Dependencies**: Install the required dependencies from requirements.txt:
